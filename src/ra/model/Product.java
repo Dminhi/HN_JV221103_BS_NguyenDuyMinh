@@ -1,12 +1,18 @@
 package ra.model;
 
+import ra.service.CatalogService;
 import util.InputMethods;
 import util.Validation;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Product {
     private String productId, productName, description;
     private double productPrice;
     private int stock;
+    private List<Catalog> catalog = new ArrayList<>();
+
 
     public String getProductId() {
         return productId;
@@ -48,13 +54,6 @@ public class Product {
         this.stock = stock;
     }
 
-    public Catalog getCatalog() {
-        return catalog;
-    }
-
-    public void setCatalog(Catalog catalog) {
-        this.catalog = catalog;
-    }
 
     public boolean isStatus() {
         return status;
@@ -64,7 +63,6 @@ public class Product {
         this.status = status;
     }
 
-    Catalog catalog;
     private boolean status;
 
     public Product() {
@@ -76,8 +74,10 @@ public class Product {
         this.description = description;
         this.productPrice = productPrice;
         this.stock = stock;
-        this.catalog = catalog;
-        this.status = status;
+        this.status = true;
+    }
+    public List<Catalog> getCatalog() {
+        return catalog;
     }
 
     public void inputData(boolean isAdd) {
@@ -115,10 +115,23 @@ public class Product {
 
             }
         }
+        System.out.println("Danh sách danh mục ");
+        CatalogService catalogList = new CatalogService();
+        catalogList.getAll().forEach(Catalog::displayData);
+
+        System.out.println("Nhập id danh muc sách");
+        int idCatalog = InputMethods.getInteger();
+        for (Catalog c : catalogList.getAll()) {
+            if (c.getCatalogId()==idCatalog) {
+                this.catalog.add(c);
+            }
+        }
 
     }
     public void displayData() {
         System.out.println("----------------------------------------------------------------------------------------");
         System.out.printf("| %4s | %10s | %10s | %10s | %10s | %15s | %4s | \n", productId, productName,catalog,productPrice,stock, description,status);
     }
+
 }
+

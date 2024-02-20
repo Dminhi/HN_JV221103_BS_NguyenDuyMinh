@@ -9,7 +9,7 @@ import util.InputMethods;
 import java.util.Collections;
 
 public class ProductManagement {
-    public static IProductService productService = new ProductService();
+    public static ProductService productService = new ProductService();
     public static void productController() {
         while (true) {
             System.out.println("********************PRODUCT-MANAGEMENT********************");
@@ -28,6 +28,7 @@ public class ProductManagement {
                     displayProduct();
                     break;
                 case 3:
+                    sort();
                     break;
                 case 4:
                     deleteProduct();
@@ -90,13 +91,20 @@ public class ProductManagement {
 
     }
     public static void findProduct(){
-        System.out.println("Nhập id san pham cần xoá");
+        System.out.println("Nhập id sản phẩm cần tìm");
         String idProduct = InputMethods.getString();
         Product findProduct = productService.findById(idProduct);
         if (findProduct == null){
             System.err.println("Không tồn tại id");
             return;
         }
-        System.out.println(findProduct);
+        findProduct.displayData();
     }
+    public static void sort(){
+        ProductService.sortProduct();
+        productService.getAll().forEach(Product::displayData);
+    }
+
+
+
 }

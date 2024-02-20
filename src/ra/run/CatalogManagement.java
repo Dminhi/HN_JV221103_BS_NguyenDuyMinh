@@ -31,7 +31,8 @@ public class CatalogManagement {
                     deleteCatalog();
                     break;
                 case 5:
-                    break;
+                    System.out.println("Thoát chương trình");
+                    return;
                 default:
                     System.out.println("Mời nhập lại");
             }
@@ -51,18 +52,20 @@ public class CatalogManagement {
         }
         System.out.println("Đã thêm mới " + quantity + " danh mục");
     }
-    public static void displayCatalog(){
-        if (catalogService.getAll().isEmpty()){
+
+    public static void displayCatalog() {
+        if (catalogService.getAll().isEmpty()) {
             System.err.println("Danh sách rỗng");
             return;
         }
         catalogService.getAll().forEach(Catalog::displayData);
     }
-    public static void updateCatalog(){
+
+    public static void updateCatalog() {
         System.out.println("Nhập id danh muc cần sửa");
         int idCatalog = InputMethods.getInteger();
         Catalog editCatalog = catalogService.findById(idCatalog);
-        if (editCatalog == null){
+        if (editCatalog == null) {
             System.err.println("Không tồn tại id");
             return;
         }
@@ -73,11 +76,12 @@ public class CatalogManagement {
         catalogService.save(editCatalog);
         System.out.println("Cập nhật thành công");
     }
-    public static void deleteCatalog(){
+
+    public static void deleteCatalog() {
         System.out.println("Nhập id danh muc cần xoá");
         int idCatalog = InputMethods.getInteger();
         Catalog deleteCatalog = catalogService.findById(idCatalog);
-        if (deleteCatalog==null){
+        if (deleteCatalog == null) {
             System.out.println("Không tồn tại id");
             return;
         }

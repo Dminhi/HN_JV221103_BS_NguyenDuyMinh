@@ -10,8 +10,8 @@ public class Validation {
     }
 
     public static boolean isValidString(String input) {
-        // Mẫu biểu thức chính quy: B(\d{3})
-        // Bắt đầu bằng B, sau đó là 3 chữ số
+        // Mẫu biểu thức chính quy: P(\d{3})
+        // Bắt đầu bằng P, sau đó là 3 chữ số
         String regex = "P\\d{3}";
 
         // Tạo Pattern

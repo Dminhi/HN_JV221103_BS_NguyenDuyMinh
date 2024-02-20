@@ -3,10 +3,11 @@ package ra.service;
 import ra.model.Product;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ProductService implements IProductService {
-    List<Product> productList = new ArrayList<>();
+    static List<Product> productList = new ArrayList<>();
 
     @Override
     public List<Product> getAll() {
@@ -32,6 +33,9 @@ public class ProductService implements IProductService {
     @Override
     public void delete(String s) {
         productList.remove(findById(s));
+    }
+    public static void sortProduct(){
+        productList.sort((p1, p2) -> Double.compare(p2.getProductPrice(), p1.getProductPrice()));
     }
 }
 
